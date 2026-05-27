@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+    <link rel="stylesheet" href="toDo.css">
+    <script defer src="toDo.js"></script>
+</head>
+<body>
+    <main>
+        <section>
+            <div id="container">
+                <h1  class="title">Minha Lista To-Do</h1>
+                <form>
+                    <h2 class="tasks">Tarefas</h2>
+                    <label for="description">Descrição</label>
+                    <input type="text" id="inputDescription" name="descriptionField">
+
+                    <label for="completed">Concluída</label>
+                    <input type="checkbox" id="checkBoxMarkAsComplete" name="MarkAsCompleteField">
+
+                    <label for="data">Data</label>
+                    <input type="date" id="inputDate" name="dateField">
+
+                    <h4 class="functions">Funções:</h4>
+                    <button id="add-btn">Adicionar</button>
+                    <button id="remove-btn">Remover</button>
+                    <button id="completed-btn">Marcar como "Concluída"</button>
+                    <button id="edit-btn">Editar</button>
+                </form>
+            </div>
+        </section>
+    </main>
+</body>
+</html>
