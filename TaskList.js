@@ -1,30 +1,44 @@
-
-const BUTTON_ADD = document.getElementById('add-btn')
-
-const TASK_LIST= [];
+let taskId = null
+let nextId = 1
+let taskList= [];
 
 document.getElementById('add-btn').addEventListener('click', e => {
     e.preventDefault()
     add()
     renderList()
 })
+document.getElementById('remove-btn').addEventListener('click', e => {
+    e.preventDefault()
+    remove()
+    renderList()
+})
+document.getElementById('edit-btn').addEventListener('click', e => {
+    e.preventDefault()
+    edit()
+    renderList()
+})
 
 function renderList() {
-    const UL = document.getElementById('task-list')
-    UL.innerHTML = ''
-    TASK_LIST.forEach(task => {
-        const LI = document.createElement('li')
-        UL.appendChild(LI)
-        LI.dataset.id = task.id;
-        LI.className = 'task-card'
-        LI.innerHTML = 
+    let ulElement = document.getElementById('task-list')
+    ulElement.innerHTML = ''
+    taskList.forEach(task => {
+        let liElement = document.createElement('li')
+        ulElement.appendChild(liElement)
+        liElement.dataset.id = task.id;
+        liElement.className = 'task-card'
+        liElement.innerHTML = 
             `<p>Descrição: ${task.description}</p>
             <p class="completed">Completa: ${task.markAsCompleted ? 'Sim' : 'Não'}</p>
             <p class="date">Data: ${task.date}</p>`;
-        LI.addEventListener('click', e => {
-            const id = e.currenttarget.dataset.id
-            console.log(id)
+        liElement.addEventListener('click', e => {
+            taskId = Number(e.currentTarget.dataset.id)
+
+            document.querySelectorAll('.task-card').forEach(card => {
+                card.classList.remove('clicked')
+            })
+            liElement.classList.add('clicked')
         })
+        
     })
 
 }
@@ -33,6 +47,34 @@ function add() {
     const  DESCRIPTION = document.getElementById('inputDescription').value
     const CHECKBOX = document.getElementById('checkBoxMarkAsComplete').checked
     const DATE = document.getElementById('inputDate').value
-    TASK_LIST.push({id: TASK_LIST.length + 1, description: DESCRIPTION, markAsCompleted: CHECKBOX, date: DATE})
-    
+    if(DESCRIPTION === ''|| DATE === ''){
+        alert('sem informaçôes')
+    }
+    else {
+        taskList.push({id: nextId++, description: DESCRIPTION, markAsCompleted: CHECKBOX, date: DATE})
+    }
+}
+function remove() {
+    if(taskId !== null){
+        taskList = taskList.filter(task => task.id !== taskId)
+    }
+
+    taskId = null
+}
+function edit() {
+    console.log(taskId)
+    const NEW_DESCRIPTION = document.getElementById('inputDescription').value
+    const NEW_CHECKBOX = document.getElementById('checkBoxMarkAsComplete').checked
+    const NEW_DATE = document.getElementById('inputDate').value
+
+    if(taskId !== null) {
+        taskList.forEach(task => {
+            if(taskId === task.id) {
+                task.description = NEW_DESCRIPTION
+                task.markAsCompleted = NEW_CHECKBOX
+                task.date = NEW_DATE
+            }
+        })
+    }
+    taskId = null
 }

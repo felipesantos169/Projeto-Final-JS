@@ -1,0 +1,27 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: aquamarine;
+    height: 500px;
+}
+.task-card {
+    width: 200px;
+    height: 100px;
+    max-height: 300px;
+    border-radius: 10px;
+    background: orange;
+    padding: 8px 10px;
+    margin-bottom: 10px;
+    list-style: none;
+    cursor: pointer;
+}
+.task-card:hover{
+    transform: scale(1.1);
+}
+.clicked {
+   border: 5px solid rgb(147, 125, 1);
+}
+.task-card p {
+  margin-top: 0;
+}
